@@ -1,0 +1,23 @@
+.DS_Store
+*.log
+*.err
+*.pyc
+*.dat
+**/adult_*
+**/emnist_*
+**/cifar_*
+*.npz
+.vscode/settings.json
+**/mnist_*
+**/20news_*
+*.lock
+*.pkl
+*.png
+*.pt
+.venv*
+*.json
+*result*
+
+# pixi environments
+.pixi
+*.egg-info

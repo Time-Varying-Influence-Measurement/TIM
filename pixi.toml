@@ -1,0 +1,42 @@
+# Root project metadata
+[project]
+authors   = ["Anonymous"]
+name      = "TIM"
+version   = "0.1.0"
+channels = ["pytorch", "nvidia", "conda-forge"]
+platforms = ["osx-arm64", "linux-64"]
+
+# Conda dependencies — Pixi will automatically treat as default feature
+[dependencies]
+python        = "3.11.*"
+pytorch       = "2.4.*"
+torchvision   = "*"
+matplotlib    = "*"
+numpy         = "*"
+pandas        = "*"
+scikit-learn  = "*"
+parameterized = "*"
+ipykernel     = "*"
+gputil        = { channel = "conda-forge" }
+
+# PyPI dependencies — also belong to default feature
+[pypi-dependencies]
+torchaudio    = "*"
+docutils         = "==0.21.2"
+emnist           = "==0.0"
+pyflowchart      = "==0.3.1"
+sphinx           = "==8.2.3"
+sphinx-autodoc2  = "==0.5.0"
+torch-tb-profiler= "==0.4.3"
+tqdm             = "==4.67.1"
+
+# Only enable default feature (i.e., dependencies defined at root)
+[environments]
+default = []
+
+# Define custom tasks
+[tasks]
+test = "python -m unittest discover -s tests -p 'test_*.py' -v"
+
+[target.linux-64.dependencies]
+pytorch-cuda  = "12.4.*"
