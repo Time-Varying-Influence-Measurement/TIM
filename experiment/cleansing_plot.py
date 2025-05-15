@@ -186,20 +186,36 @@ try:
     # Visualize results - Combined plot with all methods
     import matplotlib.pyplot as plt
 
-    # Create the main comparison plot with TracIn, TIM Last, and Reference Line
+    # Set larger global font and font size
+    plt.rcParams['font.family'] = 'Times New Roman'
+    plt.rcParams['font.size'] = 28  # Larger font
+    plt.rcParams['axes.titlesize'] = 28
+    plt.rcParams['axes.labelsize'] = 28
+    plt.rcParams['xtick.labelsize'] = 26
+    plt.rcParams['ytick.labelsize'] = 26
+    plt.rcParams['legend.fontsize'] = 26
+
+    # Color list
+    color_list = ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628']
+
+    # Create main comparison plot: TracIn, TIM Last, reference line
     plt.figure(figsize=(12, 8))
-    plt.plot(tracin_results['Sample Count'], tracin_results['Overlap Count'], '-', label='TracIn', color='blue', linewidth=2)
-    plt.plot(tim_last_results['Sample Count'], tim_last_results['Overlap Count'], '-', label='TIM', color='orange', linewidth=2)
-    plt.plot([0, total_samples], [0, num_relabeled], '--', color='gray', label='Reference Line')
+    # Plotting
+    line_tim, = plt.plot(tim_last_results['Sample Count'], tim_last_results['Overlap Count'], '-', label='TIM', color=color_list[1], linewidth=4)
+    line_tracin, = plt.plot(tracin_results['Sample Count'], tracin_results['Overlap Count'], '-', label='TracIn', color=color_list[0], linewidth=4)
+    plt.plot([0, total_samples], [0, num_relabeled], '--', color='gray', linewidth=3, label='_nolegend_')
 
     plt.xlabel('Number of Training Data Checked')
     plt.ylabel('Number of Mislabeled Data Identified')
-    plt.title(f'TinyVit-EMNIST ({num_relabeled} Flipped)')
-    plt.legend()
+    # Remove title, do not use plt.title()
+    # Adjust legend order: TIM first, TracIn second
+    plt.legend(handles=[line_tim, line_tracin])
     plt.grid(True)
     plt.tight_layout()
+    plt.xlim(0, 8000)
+    plt.ylim(bottom=0)
 
-    # Save the combined plot
+    # Save figure
     plt.savefig(os.path.join(args.save_dir, f'cleansing_plot_{relabel_pct}_pct.png'), dpi=300)
 
 
