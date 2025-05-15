@@ -176,7 +176,7 @@ The framework generates various output files in the specified save directory:
 | --length | Length parameter for tim_last influence | 3 |
 | --use_tensorboard | Enable TensorBoard logging | False |
 
-## Supported Influence Calculation Types (--type)
+### Supported Influence Calculation Types (--type)
 
 | Type | Description |
 |------------------|------------------------------------------------------------------|
@@ -209,3 +209,13 @@ TIM framework depends on:
 - PyTorch (neural networks and training)
 - NumPy, Pandas (data processing)
 - Scikit-learn (datasets and evaluation)
+
+## More Detailed Code Explanation
+
+### Workflow
+
+1. Use `experiment.train` to train the model and save checkpoints
+2. Use `experiment.infl` to compute training sample influence
+3. Use `experiment.exp_tim_cleansing` or other scripts for data cleansing and evaluation
+
+For more details and updates, please visit: [DeepWiki](https://deepwiki.com/Time-Varying-Influence-Measurement/TIM)
